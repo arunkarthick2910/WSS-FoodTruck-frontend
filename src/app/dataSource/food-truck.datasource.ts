@@ -38,7 +38,7 @@ export class FoodTruckDataSource implements DataSource<FoodTruckModel> {
       });
   }
 
-  loadTodayForm(pageIndex = 0, pageSize = 1): void {
+  loadTodayForm(pageIndex = 0, pageSize = 5): void {
     this.loadingSubject.next(true);
 
     this.foodTruckService.getToday(pageIndex, pageSize).pipe(
