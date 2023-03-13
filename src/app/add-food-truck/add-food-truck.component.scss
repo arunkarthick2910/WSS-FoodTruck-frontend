@@ -1,0 +1,32 @@
+mat-form-field {
+  width: 100%;
+}
+
+.title {
+  margin: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .error {
+    justify-content: left;
+    align-self: left;
+    display: flex;
+    align-self: start;
+    margin-bottom: 20px;
+  }
+
+  .btn-container {
+    display: flex;
+    align-self: end;
+    margin-top: 20px;
+
+    button + button {
+      margin-left: 15px;
+    }
+  }
+}

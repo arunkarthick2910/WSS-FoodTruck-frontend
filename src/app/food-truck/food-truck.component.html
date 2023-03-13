@@ -1,0 +1,93 @@
+<div class="home">
+
+  <div class="today-list">
+    <h2> Today's Food Trucks </h2>
+    <mat-table class="truck-table mat-elevation-z8" [dataSource]="dataSourceToday" matSort matSortActive="seqNo"
+      matSortDirection="asc" matSortDisableClear>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let foodTruck">{{foodTruck.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="truckName">
+        <mat-header-cell *matHeaderCellDef>Truck Name</mat-header-cell>
+        <mat-cell class="truckName-cell" *matCellDef="let foodTruck">{{foodTruck.truckName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+        <mat-cell class="date-cell" *matCellDef="let foodTruck">{{foodTruck.date | date }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsToday"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumnsToday"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginatorToday [length]="dataSourceToday.count$ | async" [pageSize]="1"
+      [pageSizeOptions]="[1,2,3]"></mat-paginator>
+  </div>
+
+  <div class="main-list">
+    <h2> Food Trucks List </h2>
+    <div class="button-container">
+      <button mat-raised-button color="primary" (click)="addData()">
+        Add data
+      </button>
+      <button mat-raised-button [disabled]="!(dataSourceMain.count$ | async)" (click)="removeData()">
+        Remove data
+      </button>
+    </div>
+
+    <mat-table class="truck-table mat-elevation-z8" [dataSource]="dataSourceMain" matSort matSortActive="seqNo"
+      matSortDirection="asc" matSortDisableClear>
+
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [disabled]="selection.hasValue() && !selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+        <mat-cell *matCellDef="let foodTruck">{{foodTruck.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="truckName">
+        <mat-header-cell *matHeaderCellDef>Truck Name</mat-header-cell>
+        <mat-cell class="truckName-cell" *matCellDef="let foodTruck">{{foodTruck.truckName}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+        <mat-cell class="date-cell" *matCellDef="let foodTruck">{{foodTruck.date | date}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="createdTs">
+        <mat-header-cell *matHeaderCellDef>CreatedTS</mat-header-cell>
+        <mat-cell class="createdTs-cell" *matCellDef="let foodTruck">{{foodTruck.createdTs | date: 'medium'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="updatedTs">
+        <mat-header-cell *matHeaderCellDef>UpdatedTS</mat-header-cell>
+        <mat-cell class="updatedTs-cell" *matCellDef="let foodTruck">{{foodTruck.updatedTs | date: 'medium'}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsMain"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayedColumnsMain"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginatorMain [length]="dataSourceMain.count$ | async" [pageSize]="10"
+      [pageSizeOptions]="[10, 15, 20]"></mat-paginator>
+  </div>
+</div>

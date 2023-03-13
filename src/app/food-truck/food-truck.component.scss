@@ -1,0 +1,33 @@
+.home {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+
+  .today-list {
+    width: 100%;
+    display: flex;
+    flex: 1 1 7%;
+    flex-direction: column;
+  }
+
+  .main-list {
+    width: 100%;
+    display: flex;
+    flex: 1 1 50%;
+    flex-direction: column;
+
+    .button-container {
+      padding-bottom: 16px;
+
+      button + button {
+        margin-left: 8px;
+      }
+    }
+
+    .truck-table {
+      width: 100%;
+    }
+  }
+}
